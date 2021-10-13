@@ -38,7 +38,7 @@
                         </form>
                     </h3>
                     <div>
-                        <a href="{{ route('report_pdf', ['tanggal' => $tanggal]) }}" class="btn btn-primary">Download PDF</a>
+                        <a href="{{ route('report_pdf', ['tanggal' => $tanggal]) }}" class="btn btn-primary" target="_blank">Download PDF</a>
                     </div>
                 </div>
 
@@ -105,8 +105,9 @@
 
 <script>
     $('#tanggal').datepicker({
-        format: 'yyyy-mm-dd',
-        daysOfWeekDisabled: "0",
+        format: 'mm-yyyy',
+        startView: 'year',
+        minViewMode: 'months',
         autoclose: true
     });
 

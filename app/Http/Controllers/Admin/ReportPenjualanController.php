@@ -13,14 +13,19 @@ class ReportPenjualanController extends Controller
 {
     public function index(Request $request)
     {
-        $now = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('Y-m-d');
+        $now = Carbon::now(new DateTimeZone('Asia/Jakarta'))->format('m-Y');
+        $from = Carbon::now(new DateTimeZone('Asia/Jakarta'))->startOfMonth();
+        $to = Carbon::now(new DateTimeZone('Asia/Jakarta'))->lastOfMonth();
+
         if ($request->query('tanggal')) {
             $now = $request->query('tanggal');
+            $from = Carbon::createFromFormat('m-Y', $now)->startOfMonth();
+            $to = Carbon::createFromFormat('m-Y', $now)->lastOfMonth();
         }
 
         $data['tanggal'] = $now;
         $transaksi = DB::table('tb_transaksi')
-            ->whereDate('tanggal_transaksi', '=', $now)
+            ->whereBetween('tanggal_transaksi', [$from, $to])
             ->get();
 
         $data['transaksi'] = json_decode($transaksi, true);
@@ -30,8 +35,10 @@ class ReportPenjualanController extends Controller
     public function pdf($tanggal)
     {
         $data['tanggal'] = $tanggal;
+        $from = Carbon::createFromFormat('m-Y', $tanggal)->startOfMonth();
+        $to = Carbon::createFromFormat('m-Y', $tanggal)->lastOfMonth();
         $transaksi = DB::table('tb_transaksi')
-            ->whereDate('tanggal_transaksi', '=', $tanggal)
+            ->whereBetween('tanggal_transaksi', [$from, $to])
             ->get();
 
         $data['transaksi'] = json_decode($transaksi, true);
