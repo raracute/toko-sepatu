@@ -1,10 +1,11 @@
 @extends('pelanggan.layouts.index')
+
 @section('content')
 <div class="container">
     <div class="mt-3">
         <div class="card md-12">
             <div class="card-body mt-3 ">
-                <div class="row ">
+                <div class="row">
                     <div class="col-sm-6 mb-3 ">
                         <a href="#" class="prod-img">
                             <img src="{{asset('img/'.$detail->gambar)}}" height="350px" alt="">
@@ -13,7 +14,6 @@
                     </div>
                     <div class="col-sm-6 mb-3">
                         <div class="product-desc">
-
                             <p class="price">
                             <h2>{{$detail->merek}}</h2>
                             <h4>Size {{$detail->ukuran}}</h4>
@@ -57,10 +57,12 @@
                     </div>
                 </div>
 
-
-
-
-
+                <div class="row d-flex flex-column pl-3">
+                    <h5>Kategori</h5>
+                    <p>{{ $detail->kategori }}</p>
+                    <h5>Keterangan</h5>
+                    <p>{{ $detail->ket }}</p>
+                </div>
             </div>
         </div>
     </div>
