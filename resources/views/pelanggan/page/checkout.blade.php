@@ -1,7 +1,7 @@
 @extends('pelanggan.layouts.index')
 @section('content')
 <div class="colorlib-product">
-    <div class="container">
+    <div class="px-5">
         <div class="row row-pb-lg">
             <div class="col-sm-10 offset-md-1">
                 <div class="process-wrap">
@@ -102,6 +102,16 @@
                                                     <span>{{ $item['quantity'] }} x {{ $item['merek'] }}. Disc 15% Off</span>
                                                     <span>Rp. {{ number_format($totalPerItem) }}</span>
                                                 </li>
+                                            @endif
+
+                                            @if($errors->any())
+                                                @foreach(json_decode($errors, true) as $error)
+                                                    @if($error['id'] == $item['id_sepatu'])
+                                                    <li>
+                                                        <small class="text-danger">Stok tersedia hanya {{ $error['availableStock'] }}</small>
+                                                    </li>
+                                                    @endif
+                                                @endforeach
                                             @endif
                                         @endforeach
                                     </ul>

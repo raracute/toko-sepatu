@@ -87,6 +87,7 @@ class CartController extends Controller
 
     public function updatecart(Request $r)
     {
+        error_log(json_encode($r->all()));
         DB::table('tb_transaksi_tmp')
             ->where('id', $r->transaksi_id)
             ->update([

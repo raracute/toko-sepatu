@@ -18,7 +18,7 @@ class CheckoutController extends Controller
         // sepatu yang ada di keranjang
         $sepatu = DB::table('tb_transaksi_tmp')
             ->join('tb_sepatu', 'tb_transaksi_tmp.kd_sepatu', '=', 'tb_sepatu.id_sepatu')
-            ->select('tb_sepatu.merek', 'tb_transaksi_tmp.quantity', 'tb_transaksi_tmp.harga')
+            ->select('tb_sepatu.merek', 'tb_sepatu.id_sepatu', 'tb_transaksi_tmp.quantity', 'tb_transaksi_tmp.harga')
             ->where('tb_transaksi_tmp.pelanggan_id', $user->id)
             ->get();
 
@@ -52,9 +52,24 @@ class CheckoutController extends Controller
         // ambil data sepatu yang ada di keranjang
         $sepatu = DB::table('tb_transaksi_tmp')
             ->join('tb_sepatu', 'tb_transaksi_tmp.kd_sepatu', '=', 'tb_sepatu.id_sepatu')
-            ->select('tb_transaksi_tmp.kd_sepatu', 'tb_transaksi_tmp.quantity', 'tb_transaksi_tmp.harga')
+            ->select('tb_sepatu.jumlah_Stok', 'tb_transaksi_tmp.kd_sepatu', 'tb_transaksi_tmp.quantity', 'tb_transaksi_tmp.harga')
             ->where('tb_transaksi_tmp.pelanggan_id', $user->id)
             ->get();
+
+        // check stock
+        $overStock = [];
+        foreach ($sepatu as $sepatuItem) {
+            if ($sepatuItem->quantity > $sepatuItem->jumlah_Stok) {
+                $overStock[] = [
+                    'id' => $sepatuItem->kd_sepatu,
+                    'availableStock' => $sepatuItem->jumlah_Stok,
+                ];
+            }
+        }
+
+        if (count($overStock) > 0) {
+            return redirect()->route('checkout')->withErrors($overStock);
+        }
 
         $kurir = DB::table('tb_kurir')
             ->where('id_kurir', $kurirId)

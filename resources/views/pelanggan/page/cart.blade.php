@@ -44,6 +44,7 @@
                         <span>Remove</span>
                     </div>
                 </div>
+
                 @foreach($cart as $c)
                     <div class="product-cart d-flex mx-auto">
                         <div class="one-eight">
@@ -64,7 +65,7 @@
                         <div class="one-eight text-center">
                             <div class="display-tc">
 
-                                <td><input type="number" name="quantity" id="quantity_change" value="{{ $c->quantity }}" min="1" onkeyup="quantityOnChange({{ $c->id }}, this)"></td>
+                                <td><input type="number" name="quantity" id="quantity_change" value="{{ $c->quantity }}" min="1" onchange="quantityOnChange({{ $c->id }}, this)"></td>
                             </div>
                         </div>
                         <div class="one-eight text-center">
@@ -77,7 +78,7 @@
                                 <form action="{{ route('cart_update') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="transaksi_id" value="{{ $c->id }}">
-                                    <input type="hidden" name="quantity" id="quantity-{{ $c->id }}" value="">
+                                    <input type="hidden" name="quantity" id="quantity-{{ $c->id }}" value="{{ $c->quantity }}">
 
                                     <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>edit</button>
                                 </form>
