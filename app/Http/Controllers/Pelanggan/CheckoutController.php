@@ -38,6 +38,12 @@ class CheckoutController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'kurir' => 'required',
+            'alamat' => 'required',
+            'pembayaran' => 'required',
+        ]);
+
         $kurirId = $request->kurir;
         $alamat = $request->alamat;
         $pembayaran = $request->pembayaran;

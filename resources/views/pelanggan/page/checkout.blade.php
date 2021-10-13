@@ -58,6 +58,7 @@
                         <div class="form-group">
                             <label for="fname">Alamat</label>
                             <textarea class="form-control" name="alamat" id="" cols="30" rows="10" placeholder="alamat anda"></textarea>
+                            @error('alamat') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
                     </div>
                 </div>
@@ -78,13 +79,13 @@
                                             @php
                                                 $totalPerItem = 0;
                                                 if ($item['quantity'] > 3) {
-                                                    $totalPerItem += (int)$item['harga'] - ((int)$item['harga'] * 0.15);
+                                                $totalPerItem += (int)$item['harga'] - ((int)$item['harga'] * 0.15);
                                                 } else {
-                                                    $totalPerItem += (int)$item['harga'];
+                                                $totalPerItem += (int)$item['harga'];
                                                 }
                                                 $total += $totalPerItem;
                                             @endphp
-                                            @if ($item['quantity'] > 3)
+                                            @if($item['quantity'] > 3)
                                                 <li>
                                                     <span><del>{{ $item['quantity'] }} x {{ $item['merek'] }}</del></span>
                                                     <span><del>Rp. {{ number_format($item['harga']) }}</del></span>
@@ -96,7 +97,7 @@
                                                 </li>
                                             @endif
 
-                                            @if ($item['quantity'] > 3)
+                                            @if($item['quantity'] > 3)
                                                 <li>
                                                     <span>{{ $item['quantity'] }} x {{ $item['merek'] }}. Disc 15% Off</span>
                                                     <span>Rp. {{ number_format($totalPerItem) }}</span>
@@ -121,15 +122,19 @@
                                     <label>Tranfer Via Bank</label>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="radio">
                                     <input type="radio" name="pembayaran" value="cod">
                                     <label>COD</label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label><input type="checkbox" value="">I have read and accept the terms and conditions</label>
-                            </div>
+
+                            @error('pembayaran') <small class="text-danger">{{ $message }}</small> @enderror
+
+                                <div class="form-group">
+                                    <label><input type="checkbox" value="">I have read and accept the terms and conditions</label>
+                                </div>
                         </div>
                     </div>
                 </div>
