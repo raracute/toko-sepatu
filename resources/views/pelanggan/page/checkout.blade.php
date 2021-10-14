@@ -78,22 +78,23 @@
                                         @foreach($sepatu as $item)
                                             @php
                                                 $totalPerItem = 0;
+                                                $totalPrice = (int)$item['quantity'] * (int)$item['harga'];
                                                 if ($item['quantity'] > 3) {
-                                                $totalPerItem += (int)$item['harga'] - ((int)$item['harga'] * 0.15);
+                                                $totalPerItem += $totalPrice - ($totalPrice * 0.15);
                                                 } else {
-                                                $totalPerItem += (int)$item['harga'];
+                                                $totalPerItem += $totalPrice;
                                                 }
                                                 $total += $totalPerItem;
                                             @endphp
                                             @if($item['quantity'] > 3)
                                                 <li>
                                                     <span><del>{{ $item['quantity'] }} x {{ $item['merek'] }}</del></span>
-                                                    <span><del>Rp. {{ number_format($item['harga']) }}</del></span>
+                                                    <span><del>Rp. {{ number_format($totalPrice) }}</del></span>
                                                 </li>
                                             @else
                                                 <li>
                                                     <span>{{ $item['quantity'] }} x {{ $item['merek'] }}</span>
-                                                    <span>Rp. {{ number_format($item['harga']) }}</span>
+                                                    <span>Rp. {{ number_format($totalPrice) }}</span>
                                                 </li>
                                             @endif
 
