@@ -8,29 +8,42 @@
                 <div class="row">
                     <div class="col-sm-6 mb-3 ">
                         <a href="#" class="prod-img">
-                            <img src="{{asset('img/'.$detail->gambar)}}" height="350px" alt="">
+                            <img src="{{ asset('img/'.$detail->gambar) }}" height="350px" alt="">
                         </a>
 
                     </div>
                     <div class="col-sm-6 mb-3">
                         <div class="product-desc">
-                            <p class="price">
-                            <h2>{{$detail->merek}}</h2>
-                            <h4>Size {{$detail->ukuran}}</h4>
-                            <h4>Rp.{{$detail->harga}}</h4>
-                            <span class="rate">
-                                <i class="icon-star-full"></i>
-                                <i class="icon-star-full"></i>
-                                <i class="icon-star-full"></i>
-                                <i class="icon-star-full"></i>
-                                <i class="icon-star-half"></i>
-                                (74 Rating)
-                            </span>
-                            </p>
+                            <div class="price">
+                                <h2>{{ $detail->merek }}</h2>
+                                <h4>Rp.{{ $detail->harga }}</h4>
+                                <span class="rate">
+                                    <i class="icon-star-full"></i>
+                                    <i class="icon-star-full"></i>
+                                    <i class="icon-star-full"></i>
+                                    <i class="icon-star-full"></i>
+                                    <i class="icon-star-half"></i>
+                                    (74 Rating)
+                                </span>
+
+                                <div class="mt-5">
+                                    <div class="form-group">
+                                        <h4>Size</h4>
+                                        <select name="size" id="size" class="form-control" style="width: 200px; color: black;">
+                                            <option>{{ $detail->ukuran-2 }}</option>
+                                            <option>{{ $detail->ukuran-1 }}</option>
+                                            <option selected>{{ $detail->ukuran }}</option>
+                                            <option>{{ $detail->ukuran+1 }}</option>
+                                            <option>{{ $detail->ukuran+2 }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
                             <form class="mt-4" action="{{ route('cart_create') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="id_sepatu" value="{{$detail->id_sepatu}}">
+                                <input type="hidden" name="id_sepatu" value="{{ $detail->id_sepatu }}">
+                                <h4>Jumlah</h4>
                                 <div class="input-group sm-4">
                                     <span class="input-group-btn">
                                         <button type="button" class="quantity-left-minus btn" data-type="minus" id="minus" data-field="">
@@ -76,12 +89,12 @@
 
     let stockValue = parseInt(document.getElementById("quantity").value);
 
-    tombolPlus.addEventListener("click", function() {
+    tombolPlus.addEventListener("click", function () {
         let hasiltambah = stockValue += 1
         document.getElementById("quantity").value = hasiltambah;
     })
 
-    tombolMinus.addEventListener("click", function() {
+    tombolMinus.addEventListener("click", function () {
         if (stockValue <= 1) {
             document.getElementById("quantity").value = 1;
         } else {
@@ -90,5 +103,6 @@
             // console.log(hasilminus);
         }
     })
+
 </script>
 @endsection
