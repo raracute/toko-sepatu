@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class SepatuModel extends Model
 {
     use HasFactory;
+
+    protected $table = 'tb_sepatu';
+
+    protected $primaryKey = 'id_sepatu';
 }

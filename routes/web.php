@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DiskonController;
 use App\Http\Controllers\Admin\SepatuController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PelangganController;
+use App\Http\Controllers\Admin\PemasokController;
 use App\Http\Controllers\Admin\PembayaranController;
 use App\Http\Controllers\Admin\ReportPenjualanController;
 use App\Http\Controllers\Admin\TransaksiController;
@@ -131,12 +132,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/kurir-create', [KurirController::class, 'create'])->name('kurir_create');
         Route::post('/kurir', [KurirController::class, 'insert'])->name('kurir_insert');
 
-
         Route::get('/kurir/{id_kurir}', [KurirController::class, 'edit'])->name('kurir_edit');
         Route::put('/kurir-update', [KurirController::class, 'update'])->name('kurir_update');
         Route::get('/kurir-delete/{id_kurir}', [KurirController::class, 'delete'])->name('kurir_delete');
 
+        // pemasok
+        Route::get('/pemasok', [PemasokController::class, 'index'])->name('pemasok_view');
+        Route::get('/pemasok-create', [PemasokController::class, 'create'])->name('pemasok_create');
+        Route::post('/pemasok', [PemasokController::class, 'insert'])->name('pemasok_insert');
 
+        Route::get('/pemasok/{id}', [PemasokController::class, 'edit'])->name('pemasok_edit');
+        Route::put('/pemasok-update/{id}', [PemasokController::class, 'update'])->name('pemasok_update');
+        Route::get('/pemasok-delete/{id}', [PemasokController::class, 'delete'])->name('pemasok_delete');
 
         //transaksi
         Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi_view');
