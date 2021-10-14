@@ -30,11 +30,12 @@
                                     <div class="form-group">
                                         <h4>Size</h4>
                                         <select name="size" id="size" class="form-control" style="width: 200px; color: black;">
-                                            <option>{{ $detail->ukuran-2 }}</option>
-                                            <option>{{ $detail->ukuran-1 }}</option>
-                                            <option selected>{{ $detail->ukuran }}</option>
-                                            <option>{{ $detail->ukuran+1 }}</option>
-                                            <option>{{ $detail->ukuran+2 }}</option>
+                                            @php
+                                                $sizes = explode(',', $detail->ukuran);
+                                            @endphp
+                                            @foreach ($sizes as $size)
+                                                <option>{{ trim($size) }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
