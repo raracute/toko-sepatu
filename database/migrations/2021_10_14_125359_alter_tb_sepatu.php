@@ -14,8 +14,21 @@ class AlterTbSepatu extends Migration
     public function up()
     {
         Schema::table('tb_sepatu', function (Blueprint $table) {
+            $table->integer('harga')->change();
             $table->integer('jumlah_stok')->change();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::table('tb_sepatu', function (Blueprint $table) {
+            $table->string('harga')->change();
             $table->string('jumlah_stok')->change();
         });
+    }
+}
