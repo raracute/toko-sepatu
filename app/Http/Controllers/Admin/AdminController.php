@@ -20,7 +20,7 @@ class AdminController extends Controller
         // keuntungan di status 3 atau 4
         $data['keuntungan'] = DB::table('tb_transaksi')
             ->whereIn('status', [2, 3])
-            ->sum('totalHarga');
+            ->sum('totalharga');
 
         return view('admin.page.home', $data);
     }
