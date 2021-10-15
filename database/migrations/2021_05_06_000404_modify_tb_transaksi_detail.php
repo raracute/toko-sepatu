@@ -14,12 +14,12 @@ class ModifyTbTransaksiDetail extends Migration
     public function up()
     {
         Schema::table('tb_transaksi_detail', function (Blueprint $table) {
-            $table->dropColumn('kd_sepatu');
+            $table->dropColumn('kd_Sepatu');
             $table->dropColumn('stok_id');
             $table->dropColumn('pelanggan_id');
             $table->dropColumn('harga_modal');
             $table->dropColumn('harga_jual');
-            $table->dropColumn('totalHarga');
+            $table->dropColumn('totalharga');
             $table->dropColumn('diskon_id');
             $table->dropColumn('nominal_diskon');
 
