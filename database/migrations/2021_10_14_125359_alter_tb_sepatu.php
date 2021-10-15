@@ -14,8 +14,13 @@ class AlterTbSepatu extends Migration
     public function up()
     {
         Schema::table('tb_sepatu', function (Blueprint $table) {
-            $table->integer('harga')->change();
-            $table->integer('jumlah_stok')->change();
+            $table->dropColumn('harga');
+            $table->dropColumn('jumlah_Stok');
+        });
+
+        Schema::table('tb_sepatu', function (Blueprint $table) {
+            $table->integer('harga');
+            $table->integer('jumlah_Stok');
         });
     }
 
@@ -27,8 +32,14 @@ class AlterTbSepatu extends Migration
     public function down()
     {
         Schema::table('tb_sepatu', function (Blueprint $table) {
-            $table->string('harga')->change();
-            $table->string('jumlah_stok')->change();
+            $table->dropColumn('harga');
+            $table->dropColumn('jumlah_Stok');
+        });
+
+
+        Schema::table('tb_sepatu', function (Blueprint $table) {
+            $table->string('harga');
+            $table->string('jumlah_Stok');
         });
     }
 }

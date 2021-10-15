@@ -19,7 +19,7 @@ class ModifyTbTransaksiDetail extends Migration
             $table->dropColumn('pelanggan_id');
             $table->dropColumn('harga_modal');
             $table->dropColumn('harga_jual');
-            $table->dropColumn('totalHarga');
+            $table->dropColumn('totalharga');
             $table->dropColumn('diskon_id');
             $table->dropColumn('nominal_diskon');
 
